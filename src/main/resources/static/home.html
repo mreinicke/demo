@@ -1,0 +1,117 @@
+<div ng-show="authenticated">
+    <div class="row">
+        <div class="text-right">
+            <p class="text-success"><b>Login:</b> {{loginname}}&nbsp&nbsp&nbsp&nbsp<b>SESSION-TOKEN:</b>
+                {{token}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div id="tabs" ng-controller="tabsCtrl">
+            <script type="text/ng-template" id="myModalContent.html">
+                <div class="modal-header">
+                    <h3 class="modal-title">Order Details</h3>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th>Cust ID
+                            </th>
+                            <th>Order Date
+                            </th>
+                            <th>Shipping Date
+                            </th>
+                            <th>Address
+                            </th>
+                            <th>Postal Code
+                            </th>
+                            <th>Region
+                        </th>
+                        </tr>
+                        <tr style="cursor: pointer;" ng-repeat="order in orders">
+                            <td>{{order.customerId}}
+                            </td>
+                            <td>{{order.orderDate}}
+                            </td>
+                            <td>{{order.shipDate}}
+                            </td>
+                            <td>{{order.shipAddress}}
+                            </td>
+                            <td>{{order.shipPostalCode}}
+                            </td>
+                            <td>{{order.shipRegion}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+                    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+                </div>
+            </script>
+            <tabset>
+                <tab heading="Table View">
+                    <h1>Customer Table</h1>
+                    <table class="table table-striped table-hover">
+
+                        <th>First Name
+                        </th>
+                        <th>Last Name
+                        </th>
+                        <th>Address
+                        </th>
+                        <th>Postal Code
+                        </th>
+                        <th>Region
+                        </th>
+                        <th>Account No
+                        </th>
+                        </tr>
+                        <tr style="cursor: pointer;" ng-repeat="customer in customerData" ng-click="setSelected(this);">
+                            <td>{{customer.fName}}
+                            </td>
+                            <td>{{customer.lName}}
+                            </td>
+                            <td>{{customer.address}}
+                            </td>
+                            <td>{{customer.postalCode}}
+                            </td>
+                            <td>{{customer.region}}
+                            </td>
+                            <td>{{customer.accountNo}}
+                            </td>
+                        </tr>
+                    </table>
+                </tab>
+                <tab heading="Card View">
+                    <h1>Customer Card</h1>
+
+                    <div style="overflow: auto">
+                        <table class="table table-striped table-hover table-bordered">
+                            <tr>
+                                <td ng-repeat="customer in customerData">
+                                    <div class="center-block" ng-click="setSelected(this);">
+                                        <div style="padding: 0">
+                                            <img src="http://placehold.it/500x250/EEE">
+
+                                            <div class="caption text-center">
+                                                <h4>{{customer.contactName}}</h4>
+                                                <p>First Name: {{customer.fName}} <br/>
+                                                LastName: {{customer.lName}}</p>
+                                                <hr/>
+                                                <h4>Full Address</h4>
+                                                <p>{{customer.address}}, {{customer.city}}, {{customer.region}} {{customer.postalCode}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </tab>
+            </tabset>
+        </div>
+    </div>
+</div>
+<div ng-show="!authenticated">
+    <h3><p class="text-danger">Login to see customer info</p></h3>
+</div>
